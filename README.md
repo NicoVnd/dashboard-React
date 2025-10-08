@@ -37,34 +37,39 @@ cd react-dashboard
 npm install
 
 # 4. J'installe TailwindCSS
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p
+npm install -D tailwindcss postcss autoprefixer @tailwindcss/postcss
 ```
 
 ## ⚙️ Configuration de Tailwind
 
-Je modifie mon fichier `tailwind.config.js` :
+Je crée manuellement mon fichier `tailwind.config.js` :
 
 ```javascript
-export default {
-  darkMode: 'class',
+import { defineConfig } from '@tailwindcss/vite'
+
+export default defineConfig({
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  theme: {
-    extend: {},
+})
+```
+
+Je configure `postcss.config.js` :
+
+```javascript
+export default {
+  plugins: {
+    '@tailwindcss/postcss': {},
+    'autoprefixer': {},
   },
-  plugins: [],
 }
 ```
 
 Puis, dans `src/index.css` :
 
 ```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 ```
 
 ## 🧩 Structure du projet
